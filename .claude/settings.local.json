@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "PowerShell(Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser)",
+      "Bash(node --max-old-space-size=4096 node_modules/.bin/tsc --noEmit)",
+      "Bash(node --max-old-space-size=4096 node_modules/typescript/bin/tsc --noEmit)",
+      "PowerShell(cd \"C:\\\\Users\\\\Rowbie Pogi\\\\Desktop\\\\MyApp\\\\mfour-solar\"; $env:NODE_OPTIONS=\"--max-old-space-size=4096\"; npm run build 2>&1)"
+    ]
+  }
+}
