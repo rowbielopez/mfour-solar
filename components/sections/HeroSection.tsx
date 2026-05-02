@@ -1,25 +1,10 @@
 'use client';
 
-import { Suspense, lazy } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowRight, ChevronDown, Leaf, Star } from 'lucide-react';
+import { ArrowRight, ChevronDown, Leaf, Star, Zap, Clock, Shield } from 'lucide-react';
 import { stats } from '@/lib/data';
-
-const SolarScene = lazy(() => import('@/components/3d/SolarScene'));
-
-function SceneFallback() {
-  return (
-    <div className="w-full h-full flex items-center justify-center">
-      <div className="relative">
-        <div className="w-40 h-40 rounded-full bg-solar-500/15 animate-ping-slow absolute inset-0" />
-        <div className="w-40 h-40 rounded-full bg-solar-500/10 flex items-center justify-center relative">
-          <div className="w-20 h-20 rounded-full bg-solar-500/20 animate-pulse" />
-        </div>
-      </div>
-    </div>
-  );
-}
 
 const stagger = {
   hidden: {},
@@ -67,7 +52,7 @@ export default function HeroSection() {
             >
               Power Your Home with{' '}
               <span className="relative inline-block">
-                <span className="text-solar-500">Clean Solar</span>
+                <span className="text-solar-500">Clean, Cost-Saving</span>
                 <svg
                   className="absolute -bottom-1.5 left-0 w-full"
                   viewBox="0 0 280 10"
@@ -82,7 +67,7 @@ export default function HeroSection() {
                   />
                 </svg>
               </span>{' '}
-              Energy
+              Solar Energy
             </motion.h1>
 
             {/* Value prop */}
@@ -90,10 +75,9 @@ export default function HeroSection() {
               variants={fadeUp}
               className="text-green-100/65 text-base sm:text-lg leading-relaxed mb-8 max-w-md"
             >
-              Slash your electricity bill by up to{' '}
-              <span className="text-white font-semibold">80%</span>. Premium solar installations
-              across the Philippines, backed by a{' '}
-              <span className="text-white font-semibold">10-year workmanship warranty</span>.
+              Reduce your electricity bill by up to{' '}
+              <span className="text-white font-semibold">80%</span> with a system that pays for itself in under 6 years — backed by a{' '}
+              <span className="text-white font-semibold">10-year workmanship warranty</span> and 25-year panel performance guarantee.
             </motion.p>
 
             {/* CTAs */}
@@ -153,20 +137,81 @@ export default function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right column — 3D scene */}
+          {/* Right column — installation PNG */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
             className="relative h-[340px] sm:h-[420px] lg:h-[560px] w-full"
           >
-            {/* Glow ring behind scene */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-72 h-72 lg:w-96 lg:h-96 rounded-full bg-solar-500/8 blur-3xl" />
+            {/* Hover wrapper — grows and glows on hover */}
+            <motion.div
+              className="relative h-full w-full"
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+            >
+              {/* Glow background — solar amber */}
+              <motion.div
+                variants={{
+                  rest: { opacity: 0.45, scale: 1 },
+                  hover: { opacity: 1, scale: 1.12 },
+                }}
+                transition={{ duration: 1.1, ease: 'easeInOut' }}
+                className="absolute inset-0 rounded-full bg-solar-500/20 blur-[70px] pointer-events-none"
+              />
+              {/* Secondary glow — green tint */}
+              <motion.div
+                variants={{
+                  rest: { opacity: 0.2 },
+                  hover: { opacity: 0.55 },
+                }}
+                transition={{ duration: 1.1, ease: 'easeInOut' }}
+                className="absolute inset-8 rounded-full bg-green-600/15 blur-[50px] pointer-events-none"
+              />
+
+              {/* PNG image — no border, no clip, contains full image */}
+              <motion.div
+                variants={{
+                  rest: { scale: 1 },
+                  hover: { scale: 1.04 },
+                }}
+                transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+                className="relative h-full w-full"
+              >
+                <Image
+                  src="/hero-solar.png"
+                  alt="Solar panels installed on a residential rooftop in the Philippines"
+                  fill
+                  priority
+                  className="object-contain drop-shadow-2xl"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </motion.div>
+            </motion.div>
+
+            {/* Stats overlay pills — pinned to bottom, outside the grow wrapper */}
+            <div className="absolute bottom-4 left-4 right-4 grid grid-cols-3 gap-2 pointer-events-none">
+              {[
+                { icon: Zap, value: '80%', label: 'Bill Reduction' },
+                { icon: Clock, value: '5.5 yrs', label: 'Avg. Payback' },
+                { icon: Shield, value: '25 yrs', label: 'Panel Warranty' },
+              ].map(({ icon: Icon, value, label }) => (
+                <div key={label} className="bg-white/10 backdrop-blur-md rounded-xl px-3 py-2.5 border border-white/15 text-center">
+                  <div className="flex items-center justify-center gap-1 mb-0.5">
+                    <Icon className="w-3 h-3 text-solar-400 flex-shrink-0" />
+                    <p className="text-white font-bold text-sm leading-none">{value}</p>
+                  </div>
+                  <p className="text-white/60 text-[10px] leading-tight">{label}</p>
+                </div>
+              ))}
             </div>
-            <Suspense fallback={<SceneFallback />}>
-              <SolarScene />
-            </Suspense>
+
+            {/* Top-left: certified badge */}
+            <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-white/10 backdrop-blur-md border border-white/15 rounded-full px-3 py-1.5 pointer-events-none">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
+              <span className="text-white text-xs font-medium">DOE & ERC Certified</span>
+            </div>
           </motion.div>
         </div>
       </div>

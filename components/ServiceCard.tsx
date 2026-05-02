@@ -2,9 +2,17 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, Zap, Settings, ClipboardList } from 'lucide-react';
+import { ArrowRight, Zap, Settings, ClipboardList, CheckCircle } from 'lucide-react';
+import { services } from '@/lib/data';
 
 const iconMap = { Zap, Settings, ClipboardList };
+
+// Map each service id to its top 3 benefits pulled from data
+const benefitsMap: Record<string, string[]> = {
+  installation: ['Up to 80% bill reduction', '25-year panel warranty', 'DOE-certified engineers'],
+  maintenance: ['Priority 24-hr response', 'Panel cleaning & testing', 'Inverter health monitoring'],
+  consultation: ['Free initial consult', 'Detailed ROI projection', 'No-obligation proposal'],
+};
 
 interface ServiceCardProps {
   id: string;
@@ -14,11 +22,9 @@ interface ServiceCardProps {
   index?: number;
 }
 
-const cardNumbers = ['01', '02', '03'];
-
 export default function ServiceCard({ id, icon, title, shortDesc, index = 0 }: ServiceCardProps) {
   const Icon = iconMap[icon as keyof typeof iconMap] ?? Zap;
-  const num = cardNumbers[index] ?? '0' + (index + 1);
+  const benefits = benefitsMap[id] ?? [];
 
   return (
     <motion.div
@@ -26,41 +32,43 @@ export default function ServiceCard({ id, icon, title, shortDesc, index = 0 }: S
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.55, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -6 }}
     >
-      <Link href={`/services#${id}`} className="block h-full">
-        <div className="group relative bg-white rounded-2xl p-7 border border-gray-100 shadow-card hover:shadow-card-hover hover:border-green-950/10 transition-all duration-300 h-full flex flex-col overflow-hidden">
+      <Link href={`/services#${id}`} className="block h-full group">
+        <div className="relative bg-white rounded-3xl p-8 border border-gray-100 shadow-card hover:shadow-card-hover hover:border-green-950/8 transition-all duration-400 h-full flex flex-col overflow-hidden hover:-translate-y-1.5">
 
-          {/* Top row: icon + number */}
-          <div className="flex items-start justify-between mb-6">
-            <motion.div
-              className="w-12 h-12 bg-green-950/5 group-hover:bg-solar-500/12 rounded-xl flex items-center justify-center transition-colors duration-300"
-              whileHover={{ rotate: [0, -8, 8, 0] }}
-              transition={{ duration: 0.5 }}
-            >
-              <Icon className="w-6 h-6 text-green-950 group-hover:text-solar-600 transition-colors duration-300" />
-            </motion.div>
-            <span className="font-display font-bold text-3xl text-gray-100 group-hover:text-solar-500/20 transition-colors duration-300 select-none leading-none">
-              {num}
-            </span>
+          {/* Icon */}
+          <div className="mb-6">
+            <div className="w-14 h-14 rounded-2xl bg-green-950 group-hover:bg-solar-500 flex items-center justify-center transition-colors duration-300 shadow-sm">
+              <Icon className="w-6 h-6 text-white group-hover:text-green-950 transition-colors duration-300" />
+            </div>
           </div>
 
           {/* Content */}
-          <h3 className="font-display font-semibold text-[1.05rem] text-green-950 mb-2.5 leading-snug">
+          <h3 className="font-display font-bold text-lg text-green-950 mb-2.5 leading-snug">
             {title}
           </h3>
-          <p className="text-gray-500 text-sm leading-relaxed flex-1">
+          <p className="text-gray-500 text-sm leading-relaxed mb-6 flex-1">
             {shortDesc}
           </p>
 
-          {/* CTA row */}
-          <div className="flex items-center gap-2 mt-6 text-sm font-semibold text-gray-400 group-hover:text-solar-600 transition-colors duration-300">
+          {/* Benefits list */}
+          <ul className="space-y-2 mb-7">
+            {benefits.map((b) => (
+              <li key={b} className="flex items-start gap-2.5 text-sm text-gray-600">
+                <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" />
+                {b}
+              </li>
+            ))}
+          </ul>
+
+          {/* CTA */}
+          <div className="flex items-center gap-2 text-sm font-semibold text-green-950 group-hover:text-solar-600 transition-colors duration-300">
             Learn more
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
           </div>
 
-          {/* Bottom accent line */}
-          <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-solar-500/0 via-solar-500 to-solar-500/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center" />
+          {/* Corner accent */}
+          <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-green-950/0 via-solar-500 to-green-950/0 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-center" />
         </div>
       </Link>
     </motion.div>

@@ -82,24 +82,28 @@ export default function FloatingCTA() {
           {/* Main toggle button */}
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.1 }}
+            animate={{
+              scale: 1,
+              opacity: 1,
+              boxShadow: open
+                ? '0 4px 20px rgba(255,195,0,0.3)'
+                : [
+                    '0 4px 14px rgba(255,195,0,0.2)',
+                    '0 4px 28px rgba(255,195,0,0.45)',
+                    '0 4px 14px rgba(255,195,0,0.2)',
+                  ],
+            }}
+            transition={{
+              scale: { type: 'spring', stiffness: 260, damping: 20, delay: 0.1 },
+              opacity: { delay: 0.1, duration: 0.4 },
+              boxShadow: { duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: 1.5 },
+            }}
             onClick={() => setOpen(!open)}
-            whileHover={{ scale: 1.06 }}
+            whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            className="relative w-14 h-14 bg-solar-500 hover:bg-solar-400 rounded-full shadow-glow flex items-center justify-center transition-colors"
-            aria-label="Contact options"
+            className="relative flex items-center gap-2.5 bg-solar-500 hover:bg-solar-400 rounded-full pl-4 pr-5 h-14 transition-colors"
+            aria-label="Get Free Quote"
           >
-            {/* Pulse ring — only when closed */}
-            {!open && (
-              <span className="absolute inset-0 rounded-full bg-solar-500 animate-ping-slow opacity-40" />
-            )}
-
-            {/* Notification dot */}
-            {!open && (
-              <span className="absolute -top-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white" />
-            )}
-
             <AnimatePresence mode="wait" initial={false}>
               {open ? (
                 <motion.div
@@ -114,12 +118,14 @@ export default function FloatingCTA() {
               ) : (
                 <motion.div
                   key="open"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   transition={{ duration: 0.15 }}
+                  className="flex items-center gap-2"
                 >
-                  <MessageCircle className="w-6 h-6 text-green-950" />
+                  <MessageCircle className="w-5 h-5 text-green-950 flex-shrink-0" />
+                  <span className="text-green-950 font-semibold text-sm whitespace-nowrap">Get Free Quote</span>
                 </motion.div>
               )}
             </AnimatePresence>

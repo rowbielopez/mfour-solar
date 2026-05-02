@@ -87,13 +87,13 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="inline-flex mb-5">
+            <Link href="/" className="inline-flex mb-6">
               <Image
                 src="/mfour-logo.png"
                 alt="MFour Solar"
-                width={150}
-                height={44}
-                className="h-10 w-auto object-contain brightness-0 invert"
+                width={200}
+                height={58}
+                className="h-14 w-auto object-contain"
               />
             </Link>
 

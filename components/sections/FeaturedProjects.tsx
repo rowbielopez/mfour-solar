@@ -18,14 +18,17 @@ export default function FeaturedProjects() {
           className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14"
         >
           <div>
-            <span className="inline-block text-solar-600 font-semibold text-sm uppercase tracking-widest mb-3">Our Work</span>
+            <span className="eyebrow">Our Work</span>
             <h2 className="font-display font-bold text-3xl sm:text-4xl text-green-950">
               Featured Installations
             </h2>
+            <p className="text-gray-500 mt-3 max-w-md leading-relaxed">
+              Real projects, real results — from Luzon to Mindanao.
+            </p>
           </div>
           <Link
             href="/projects"
-            className="flex items-center gap-2 text-sm font-semibold text-green-950 hover:text-solar-600 transition-colors group whitespace-nowrap"
+            className="flex items-center gap-2 text-sm font-semibold text-green-950 hover:text-solar-600 transition-colors group whitespace-nowrap flex-shrink-0"
           >
             View all projects
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

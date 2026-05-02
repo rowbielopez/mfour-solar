@@ -71,10 +71,7 @@ export default function Navbar() {
                 alt="MFour Solar"
                 width={140}
                 height={40}
-                className={cn(
-                  'h-9 w-auto object-contain transition-all duration-300',
-                  !transparent ? 'brightness-100' : 'brightness-0 invert'
-                )}
+                className="h-9 w-auto object-contain"
                 priority
               />
             </Link>

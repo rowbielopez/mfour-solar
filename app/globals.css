@@ -205,4 +205,11 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Extra transition durations used in components */
+  .duration-400 { transition-duration: 400ms; }
+  .duration-600 { transition-duration: 600ms; }
+
+  /* Smooth easing shorthand */
+  .ease-smooth { transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
 }
