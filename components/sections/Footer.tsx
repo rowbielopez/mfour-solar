@@ -1,9 +1,8 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, Facebook, Instagram, Youtube, Send, CheckCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook } from 'lucide-react';
 
 const footerLinks = {
   Company: [
@@ -26,61 +25,9 @@ const footerLinks = {
   ],
 };
 
-const certifications = [
-  'DOE Certified',
-  'ERC Licensed',
-  'PHILRECA Member',
-  'ISO 9001:2015',
-  'SEIA Accredited',
-];
-
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) setSubscribed(true);
-  };
-
   return (
     <footer className="bg-green-950 text-white">
-      {/* Newsletter strip */}
-      <div className="border-b border-white/8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-            <div className="max-w-sm">
-              <p className="font-semibold text-white text-sm mb-0.5">Get Solar Tips & Savings Insights</p>
-              <p className="text-green-100/50 text-xs">Monthly digest — no spam, unsubscribe any time.</p>
-            </div>
-            {subscribed ? (
-              <div className="flex items-center gap-2 text-solar-400 text-sm font-medium">
-                <CheckCircle className="w-4 h-4" />
-                You're subscribed! Check your inbox.
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="flex w-full sm:w-auto gap-2">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  required
-                  className="flex-1 sm:w-56 bg-white/8 border border-white/12 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-green-100/30 focus:outline-none focus:ring-2 focus:ring-solar-500/50 transition-all"
-                />
-                <button
-                  type="submit"
-                  className="flex-shrink-0 flex items-center gap-1.5 bg-solar-500 hover:bg-solar-400 text-green-950 font-semibold px-4 py-2.5 rounded-xl text-sm transition-all hover:-translate-y-0.5"
-                >
-                  <Send className="w-3.5 h-3.5" />
-                  <span className="hidden sm:inline">Subscribe</span>
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-      </div>
-
       {/* Main grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
@@ -91,15 +38,15 @@ export default function Footer() {
               <Image
                 src="/mfour-logo.png"
                 alt="MFour Solar"
-                width={200}
-                height={58}
-                className="h-14 w-auto object-contain"
+                width={240}
+                height={70}
+                className="h-16 w-auto object-contain"
               />
             </Link>
 
             <p className="text-green-100/60 text-sm leading-relaxed max-w-xs mb-1">
-              Powering Filipino homes and businesses with clean, affordable solar energy since 2018.
-              500+ installations. 12 MW deployed. Zero-compromise quality.
+              Powering Filipino homes and businesses with clean, affordable solar energy.
+              100+ installations. 10 years of engineering experience. Zero-compromise quality.
             </p>
             <p className="text-solar-400/80 text-xs font-medium mb-5">
               Lead Engineer: Engr. Mark Daryll Acosta
@@ -133,16 +80,17 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Social links */}
+            {/* Social links — only render channels with a real URL.
+                TODO: add real Instagram / YouTube URLs here when available. */}
             <div className="flex items-center gap-2 mt-6">
               {[
                 { icon: Facebook, href: 'https://www.facebook.com/profile.php?id=61588860696904', label: 'Facebook' },
-                { icon: Instagram, href: '#', label: 'Instagram' },
-                { icon: Youtube, href: '#', label: 'YouTube' },
               ].map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="w-9 h-9 rounded-xl bg-white/5 hover:bg-solar-500 flex items-center justify-center transition-all hover:-translate-y-0.5 group"
                 >
@@ -173,17 +121,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Certifications strip */}
+      {/* Legal strip */}
       <div className="border-t border-white/8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mb-5">
-            {certifications.map((cert) => (
-              <div key={cert} className="flex items-center gap-1.5">
-                <div className="w-1 h-1 rounded-full bg-solar-500/60" />
-                <span className="text-xs text-green-100/35 font-medium">{cert}</span>
-              </div>
-            ))}
-          </div>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-green-100/30">
             <p>© {new Date().getFullYear()} MFour Solar Philippines, Inc. All rights reserved.</p>
             <div className="flex items-center gap-5">

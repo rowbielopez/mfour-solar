@@ -9,7 +9,7 @@ const iconMap = { Zap, Settings, ClipboardList };
 
 // Map each service id to its top 3 benefits pulled from data
 const benefitsMap: Record<string, string[]> = {
-  installation: ['Up to 80% bill reduction', '25-year panel warranty', 'DOE-certified engineers'],
+  installation: ['Up to 80% bill reduction', '12-year panel warranty', 'Remote monitoring included'],
   maintenance: ['Priority 24-hr response', 'Panel cleaning & testing', 'Inverter health monitoring'],
   consultation: ['Free initial consult', 'Detailed ROI projection', 'No-obligation proposal'],
 };

@@ -1,13 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Shield, Award, Zap, Star } from 'lucide-react';
+import { Building2, Zap, Clock, Settings } from 'lucide-react';
 
 const items = [
-  { icon: Star,   text: '4.9/5 Rating',        sub: '200+ verified reviews' },
-  { icon: Award,  text: 'DOE & ERC Certified',  sub: 'Philippines licensed'  },
-  { icon: Shield, text: '10-Year Warranty',     sub: 'Workmanship guarantee' },
-  { icon: Zap,    text: '500+ Installations',   sub: 'Across the Philippines'},
+  { icon: Zap,       text: '100+ Installations',     sub: 'Completed nationwide'   },
+  { icon: Clock,     text: '10 Years Experience',    sub: 'In solar engineering'   },
+  { icon: Settings,  text: 'Engineering Service',     sub: 'Solar power engineering' },
+  { icon: Building2, text: 'Residential & Commercial', sub: 'Projects delivered'    },
 ];
 
 export default function TrustBar() {

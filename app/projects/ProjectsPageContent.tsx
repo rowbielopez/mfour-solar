@@ -1,15 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, MapPin, Zap, Calendar, Tag } from 'lucide-react';
-import ProjectCard from '@/components/ProjectCard';
+import ProjectCard, { type Project } from '@/components/ProjectCard';
+import ProjectModal from '@/components/sections/ProjectModal';
 import { projects } from '@/lib/data';
 import CTASection from '@/components/sections/CTASection';
-import Badge from '@/components/ui/Badge';
-
-type Project = (typeof projects)[0];
 
 const filterOptions = ['All', 'Residential', 'Commercial', 'Industrial', 'Institutional', 'Agriculture'];
 
@@ -38,7 +34,7 @@ export default function ProjectsPageContent() {
               Real Installations. Real Results.
             </h1>
             <p className="text-green-100/70 text-lg">
-              Over 500 solar installations completed across Luzon, Visayas, and Mindanao.
+              Over 100 solar installations completed across Luzon, Visayas, and Mindanao.
             </p>
           </motion.div>
         </div>
@@ -86,63 +82,8 @@ export default function ProjectsPageContent() {
         </div>
       </section>
 
-      {/* Modal */}
-      <AnimatePresence>
-        {modal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
-            onClick={() => setModal(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              className="bg-white rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative h-60">
-                <Image
-                  src={modal.image}
-                  alt={modal.title}
-                  fill
-                  className="object-cover"
-                />
-                <button
-                  onClick={() => setModal(null)}
-                  className="absolute top-3 right-3 w-8 h-8 bg-black/40 hover:bg-black/60 rounded-full flex items-center justify-center text-white transition-colors"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-              <div className="p-6">
-                <h3 className="font-display font-bold text-xl text-green-950 mb-1">{modal.title}</h3>
-                <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400 mb-4">
-                  <span className="flex items-center gap-1.5"><MapPin className="w-4 h-4" />{modal.location}</span>
-                  <span className="flex items-center gap-1.5"><Zap className="w-4 h-4 text-solar-500" />{modal.capacity}</span>
-                  <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4" />{modal.year}</span>
-                </div>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">{modal.description}</p>
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  <Tag className="w-4 h-4 text-gray-300 self-center" />
-                  {modal.tags.map((tag) => (
-                    <Badge key={tag} variant="green">{tag}</Badge>
-                  ))}
-                </div>
-                <a
-                  href="/contact"
-                  className="btn-primary w-full justify-center text-sm"
-                >
-                  Get a Similar System Quote
-                </a>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Project detail modal with photo gallery */}
+      <ProjectModal project={modal} onClose={() => setModal(null)} />
 
       <CTASection
         heading="Start Your Solar Project"

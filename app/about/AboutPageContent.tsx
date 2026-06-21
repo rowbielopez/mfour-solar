@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Sun, Target, Eye, Heart } from 'lucide-react';
+import { Target, Eye, Heart } from 'lucide-react';
 import { stats } from '@/lib/data';
 import CTASection from '@/components/sections/CTASection';
 
@@ -16,7 +16,7 @@ const team = [
   {
     name: 'Ana Reyes',
     role: 'Head of Engineering',
-    bio: 'BSEE from UP Diliman, certified solar PV system designer. Oversees all installation quality.',
+    bio: 'BSEE from UP Diliman, experienced solar PV system designer. Oversees all installation quality.',
     initials: 'AR',
   },
   {
@@ -55,8 +55,8 @@ export default function AboutPageContent() {
               </h1>
               <p className="text-green-100/70 text-lg leading-relaxed">
                 We started with a simple belief: every Filipino deserves access to clean, affordable
-                energy. Today, with over 500 installations and 12 MW deployed, we're making that
-                belief a reality—one rooftop at a time.
+                energy. Today, with over 100 installations and 10 years of engineering experience,
+                we're making that belief a reality—one rooftop at a time.
               </p>
             </motion.div>
             <motion.div
@@ -90,7 +90,13 @@ export default function AboutPageContent() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="text-center"
               >
-                <p className="font-display font-bold text-3xl sm:text-4xl text-green-950">{stat.value}</p>
+                <p
+                  className={`font-display font-bold text-green-950 ${
+                    /\d/.test(stat.value) ? 'text-3xl sm:text-4xl' : 'text-xl sm:text-2xl'
+                  }`}
+                >
+                  {stat.value}
+                </p>
                 <p className="text-green-950/60 text-sm mt-1">{stat.label}</p>
               </motion.div>
             ))}
@@ -128,8 +134,8 @@ export default function AboutPageContent() {
                 </p>
                 <p>
                   By 2021, we had expanded across Metro Manila and the major Visayan cities. Today,
-                  MFour Solar employs a team of 40+ certified engineers, project managers, and
-                  support specialists serving clients from Batanes to General Santos City.
+                  MFour Solar fields a dedicated team of experienced engineers, project managers, and
+                  support specialists serving clients from Luzon to Mindanao.
                 </p>
               </div>
             </motion.div>
@@ -217,28 +223,6 @@ export default function AboutPageContent() {
                 <p className="text-gray-500 text-xs leading-relaxed">{member.bio}</p>
               </motion.div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Certifications */}
-      <section className="py-16 bg-white border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center text-gray-400 text-sm font-medium mb-8 uppercase tracking-widest">
-            Certifications & Memberships
-          </p>
-          <div className="flex flex-wrap justify-center gap-8 items-center">
-            {['DOE Certified', 'ERC Licensed', 'PHILRECA Member', 'SEIA Accredited', 'ISO 9001:2015'].map(
-              (cert) => (
-                <div
-                  key={cert}
-                  className="flex items-center gap-2 bg-gray-50 rounded-full px-5 py-2.5 border border-gray-100"
-                >
-                  <Sun className="w-4 h-4 text-solar-500" />
-                  <span className="text-gray-600 text-sm font-medium">{cert}</span>
-                </div>
-              )
-            )}
           </div>
         </div>
       </section>

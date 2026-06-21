@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Award, Shield, Users, TrendingUp, Headphones, Leaf } from 'lucide-react';
+import { Award, Shield, Users, TrendingUp, Headphones, Leaf, Battery } from 'lucide-react';
 import { whyChooseUs } from '@/lib/data';
 
-const iconMap = { Award, Shield, Users, TrendingUp, Headphones, Leaf };
+const iconMap = { Award, Shield, Users, TrendingUp, Headphones, Leaf, Battery };
 
 const bars = [
   { label: 'Client Satisfaction', value: 98, color: 'from-solar-500 to-solar-400' },
@@ -33,7 +33,7 @@ export default function WhyChooseUs() {
               The Philippines' Most Trusted Solar Integrator
             </h2>
             <p className="text-gray-500 leading-relaxed mb-8 max-w-md">
-              Over 500 installations, 12 MW deployed, and a team of 40+ certified engineers.
+              Over 100 installations completed and 10 years of solar engineering experience.
               We combine technical precision with genuine care for every client's investment.
             </p>
 
@@ -69,13 +69,13 @@ export default function WhyChooseUs() {
               <div className="absolute top-0 right-0 w-32 h-32 bg-solar-500/10 rounded-full blur-2xl" />
               <div className="relative flex items-center gap-4">
                 <div className="flex-shrink-0 text-center bg-solar-500/15 rounded-xl px-4 py-3">
-                  <p className="font-display font-bold text-3xl text-solar-500 leading-none">5.5</p>
-                  <p className="text-solar-400/70 text-xs mt-0.5">yrs avg</p>
+                  <p className="font-display font-bold text-3xl text-solar-500 leading-none">2–5</p>
+                  <p className="text-solar-400/70 text-xs mt-0.5">yrs</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-white text-sm">Average Payback Period</p>
+                  <p className="font-semibold text-white text-sm">Typical Payback Period</p>
                   <p className="text-green-100/60 text-xs mt-0.5 leading-relaxed">
-                    Most clients fully recover their investment in under 6 years — then save for 20+ years more.
+                    Most clients recover their investment within 2 to 5 years — then keep saving for years more.
                   </p>
                 </div>
               </div>

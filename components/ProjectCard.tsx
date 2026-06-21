@@ -2,16 +2,16 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { MapPin, Zap } from 'lucide-react';
+import { MapPin, Zap, Images } from 'lucide-react';
 
-interface Project {
+export interface Project {
   id: number;
   title: string;
   location: string;
   type: string;
   capacity: string;
   description: string;
-  image: string;
+  photos: string[];
   tags: string[];
   year: string;
 }
@@ -36,7 +36,7 @@ export default function ProjectCard({ project, index = 0, onClick }: ProjectCard
       <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-gray-100 shadow-card">
 
         <Image
-          src={project.image}
+          src={project.photos[0]}
           alt={project.title}
           fill
           className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.07]"
@@ -55,6 +55,14 @@ export default function ProjectCard({ project, index = 0, onClick }: ProjectCard
             {project.type}
           </span>
         </div>
+
+        {/* Photo-count affordance — signals an openable gallery */}
+        {project.photos.length > 1 && (
+          <span className="absolute bottom-4 right-4 z-10 flex items-center gap-1 text-xs text-white font-medium bg-black/35 backdrop-blur-sm rounded-full px-2.5 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <Images className="w-3 h-3" />
+            {project.photos.length} photos
+          </span>
+        )}
 
         {/* Bottom info — always visible */}
         <div className="absolute bottom-0 left-0 right-0 p-5">

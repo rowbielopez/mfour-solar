@@ -1,12 +1,16 @@
 'use client';
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import ProjectCard from '@/components/ProjectCard';
+import ProjectCard, { type Project } from '@/components/ProjectCard';
+import ProjectModal from '@/components/sections/ProjectModal';
 import { projects } from '@/lib/data';
 
 export default function FeaturedProjects() {
+  const [modal, setModal] = useState<Project | null>(null);
+
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -37,10 +41,12 @@ export default function FeaturedProjects() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {projects.slice(0, 3).map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} />
+            <ProjectCard key={project.id} project={project} index={i} onClick={setModal} />
           ))}
         </div>
       </div>
+
+      <ProjectModal project={modal} onClose={() => setModal(null)} />
     </section>
   );
 }

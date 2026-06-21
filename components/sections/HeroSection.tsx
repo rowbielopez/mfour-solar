@@ -37,11 +37,11 @@ export default function HeroSection() {
             animate="show"
             className="text-white max-w-xl lg:max-w-none"
           >
-            {/* Certification badge */}
+            {/* Service descriptor badge */}
             <motion.div variants={fadeUp} className="mb-7">
               <span className="inline-flex items-center gap-2 bg-solar-500/15 border border-solar-500/25 rounded-full px-4 py-1.5 text-solar-400 text-xs font-semibold tracking-wide">
                 <Leaf className="w-3.5 h-3.5 flex-shrink-0" />
-                DOE & ERC Certified Solar Integrator — Philippines
+                Hybrid Solar + Battery Systems — Tuguegarao City
               </span>
             </motion.div>
 
@@ -76,8 +76,9 @@ export default function HeroSection() {
               className="text-green-100/65 text-base sm:text-lg leading-relaxed mb-8 max-w-md"
             >
               Reduce your electricity bill by up to{' '}
-              <span className="text-white font-semibold">80%</span> with a system that pays for itself in under 6 years — backed by a{' '}
-              <span className="text-white font-semibold">10-year workmanship warranty</span> and 25-year panel performance guarantee.
+              <span className="text-white font-semibold">80%</span> with a system that can pay for itself in as little as{' '}
+              <span className="text-white font-semibold">2 to 5 years</span> — backed by up to{' '}
+              <span className="text-white font-semibold">12-year panel</span> and 5-year inverter &amp; battery warranties.
             </motion.p>
 
             {/* CTAs */}
@@ -116,7 +117,7 @@ export default function HeroSection() {
                   ))}
                 </div>
                 <p className="text-green-100/50 text-xs">
-                  Trusted by <span className="text-white font-medium">500+</span> Filipino families
+                  Trusted by <span className="text-white font-medium">100+</span> Filipino homes &amp; businesses
                 </p>
               </div>
             </motion.div>
@@ -126,14 +127,21 @@ export default function HeroSection() {
               variants={fadeUp}
               className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/10"
             >
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <p className="font-display font-bold text-xl sm:text-2xl text-solar-400 leading-none">
-                    {stat.value}
-                  </p>
-                  <p className="text-green-100/40 text-xs mt-1.5 leading-snug">{stat.label}</p>
-                </div>
-              ))}
+              {stats.map((stat) => {
+                const isNumeric = /\d/.test(stat.value);
+                return (
+                  <div key={stat.label}>
+                    <p
+                      className={`font-display font-bold text-solar-400 leading-tight ${
+                        isNumeric ? 'text-xl sm:text-2xl' : 'text-sm sm:text-base'
+                      }`}
+                    >
+                      {stat.value}
+                    </p>
+                    <p className="text-green-100/40 text-xs mt-1.5 leading-snug">{stat.label}</p>
+                  </div>
+                );
+              })}
             </motion.div>
           </motion.div>
 
@@ -194,8 +202,8 @@ export default function HeroSection() {
             <div className="absolute bottom-4 left-4 right-4 grid grid-cols-3 gap-2 pointer-events-none">
               {[
                 { icon: Zap, value: '80%', label: 'Bill Reduction' },
-                { icon: Clock, value: '5.5 yrs', label: 'Avg. Payback' },
-                { icon: Shield, value: '25 yrs', label: 'Panel Warranty' },
+                { icon: Clock, value: '2–5 yrs', label: 'Avg. Payback' },
+                { icon: Shield, value: '12-yr', label: 'Panel Warranty' },
               ].map(({ icon: Icon, value, label }) => (
                 <div key={label} className="bg-white/10 backdrop-blur-md rounded-xl px-3 py-2.5 border border-white/15 text-center">
                   <div className="flex items-center justify-center gap-1 mb-0.5">
@@ -207,10 +215,10 @@ export default function HeroSection() {
               ))}
             </div>
 
-            {/* Top-left: certified badge */}
+            {/* Top-left: feature badge */}
             <div className="absolute top-4 left-4 flex items-center gap-1.5 bg-white/10 backdrop-blur-md border border-white/15 rounded-full px-3 py-1.5 pointer-events-none">
               <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
-              <span className="text-white text-xs font-medium">DOE & ERC Certified</span>
+              <span className="text-white text-xs font-medium">Remote Monitoring Included</span>
             </div>
           </motion.div>
         </div>

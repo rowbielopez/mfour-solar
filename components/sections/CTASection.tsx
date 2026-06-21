@@ -18,7 +18,7 @@ const trustItems = [
 
 export default function CTASection({
   heading = 'Ready to Go Solar?',
-  subtext = 'Join 500+ Filipino homeowners and businesses who cut their electricity bills by up to 80%.',
+  subtext = 'Join 100+ Filipino homeowners and businesses who cut their electricity bills by up to 80%.',
   dark = true,
 }: CTASectionProps) {
   return (
